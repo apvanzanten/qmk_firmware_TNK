@@ -9,7 +9,8 @@
         "bootmagic": false,
         "extrakey": true,
         "mousekey": false,
-        "nkro": true
+        "nkro": true,
+        "rgblight": true
     },
 
     "usb": {
@@ -44,6 +45,15 @@
     },
 
     // common: WS2812 DIN: GP16
+    // set up as poor man's power LED
+    "ws2812": {
+        "pin": "GP16",
+        "driver": "vendor"
+    },
+    "rgblight": {
+        "led_count": 1,
+        "max_brightness": 8
+    },
 
     "split": {
         "enabled": true,

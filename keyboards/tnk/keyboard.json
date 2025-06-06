@@ -1,5 +1,5 @@
 {
-    "manufacturer": "Arjen van Zanten",
+    "manufacturer": "APvZ",
     "keyboard_name": "tnk",
     "maintainer": "Arjen van Zanten",
     // NOTE not actually a kb2040, but an rp2040-zero; probably close enough
@@ -11,35 +11,73 @@
         "mousekey": false,
         "nkro": true
     },
-    "matrix_pins": {
-        // LEFT HALF
-            // SW_COL_1: rp2040 GP29
-            // SW_COL_2: rp2040 GP28
-            // SW_COL_3: rp2040 GP26
-            // SW_COL_4: rp2040 GP15
-            // SW_COL_5: rp2040 GP14
-            // SW_COL_6: rp2040 GP13
 
-            // SW_ROW_1: rp2040 GP12
-            // SW_ROW_2: rp2040 GP11
-            // SW_ROW_3: rp2040 GP10
-            // SW_ROW_4: rp2040 GP09
-        "cols": ["GP29", "GP28", "GP26", "GP15", "GP14", "GP13"],
-        "rows": ["GP12", "GP11", "GP10", "GP9"]
-    },
     "usb": {
         "device_version": "1.0.0",
-        "pid": "0x0000",
-        "vid": "0xFEED"
+        "pid": "0xDEAD",
+        "vid": "0xBEEF"
     },
     "serial": {
-        "driver": "usart",
+        "driver": "vendor",
         "tx_pin": "GP4",
         "rx_pin": "GP5"
     },
+
+    "matrix_pins": {
+        /*
+            left half:
+            * SW_COL_1: GP29
+            * SW_COL_2: GP28
+            * SW_COL_3: GP26
+            * SW_COL_4: GP15
+            * SW_COL_5: GP14
+            * SW_COL_6: GP13
+            * SW_ROW_1: GP12
+            * SW_ROW_2: GP11
+            * SW_ROW_3: GP10
+            * SW_ROW_4: GP09
+
+            where COLs are left-to-right and ROWs are top-to-bottom 
+        */
+        "cols": [ "GP29", "GP28", "GP26", "GP15", "GP14", "GP13" ],
+        "rows": [ "GP12", "GP11", "GP10", "GP9" ]
+    },
+
+    // common: WS2812 DIN: GP16
+
+    "split": {
+        "enabled": true,
+        "matrix_pins": {
+            "right": {
+                /*
+                    right half:
+                    * SW_COL_1: GP3
+                    * SW_COL_2: GP2
+                    * SW_COL_3: GP6
+                    * SW_COL_4: GP7
+                    * SW_COL_5: GP8
+                    * SW_COL_6: GP9
+                    * SW_ROW_1: GP10
+                    * SW_ROW_2: GP11
+                    * SW_ROW_3: GP12
+                    * SW_ROW_4: GP13
+
+                    Where COLs are right-to-left and ROWs are top-to-bottom; This was done for pcb design hack reasons.
+                    Col pins below are reversed s.t. cols are left-to-right as far as QMK is concerned.
+                */
+                "cols": [ "GP9", "GP8", "GP7", "GP6", "GP2", "GP3" ],
+                "rows": [ "GP10", "GP11", "GP12", "GP13" ]
+            }
+        },
+
+        "serial": {
+            "driver": "vendor"
+        }
+    },
     "layouts": {
-        "LAYOUT_left": {
+        "LAYOUT_full": {
             "layout": [
+                // LEFT top row
                 {"matrix": [0, 0], "x": 0, "y": 0.25},
                 {"matrix": [0, 1], "x": 1, "y": 0.25},
                 {"matrix": [0, 2], "x": 2, "y": 0.125},
@@ -47,6 +85,15 @@
                 {"matrix": [0, 4], "x": 4, "y": 0.125},
                 {"matrix": [0, 5], "x": 5, "y": 0.25},
 
+                // RIGHT top row
+                {"matrix": [4, 0], "x": 8, "y": 0.25},
+                {"matrix": [4, 1], "x": 9, "y": 0.125},
+                {"matrix": [4, 2], "x": 10, "y": 0},
+                {"matrix": [4, 3], "x": 11, "y": 1.125},
+                {"matrix": [4, 4], "x": 12, "y": 0.25},
+                {"matrix": [4, 5], "x": 13, "y": 0.25},
+
+                // LEFT mid row
                 {"matrix": [1, 0], "x": 0, "y": 1.25},
                 {"matrix": [1, 1], "x": 1, "y": 1.25},
                 {"matrix": [1, 2], "x": 2, "y": 1.125},
@@ -54,6 +101,15 @@
                 {"matrix": [1, 4], "x": 4, "y": 1.125},
                 {"matrix": [1, 5], "x": 5, "y": 1.25},
 
+                // RIGHT mid row
+                {"matrix": [5, 0], "x": 8, "y": 1.25},
+                {"matrix": [5, 1], "x": 9, "y": 1.125},
+                {"matrix": [5, 2], "x": 10, "y": 1},
+                {"matrix": [5, 3], "x": 11, "y": 1.125},
+                {"matrix": [5, 4], "x": 12, "y": 1.25},
+                {"matrix": [5, 5], "x": 13, "y": 1.25},
+
+                // LEFT bottom row
                 {"matrix": [2, 0], "x": 0, "y": 2.25},
                 {"matrix": [2, 1], "x": 1, "y": 2.25},
                 {"matrix": [2, 2], "x": 2, "y": 2.125},
@@ -61,8 +117,21 @@
                 {"matrix": [2, 4], "x": 4, "y": 2.125},
                 {"matrix": [2, 5], "x": 5, "y": 2.25},
 
-                {"matrix": [3, 0], "x": 5, "y": 3.0},
-                {"matrix": [3, 1], "x": 6, "y": 3.25}
+                // RIGHT bottom row
+                {"matrix": [6, 0], "x": 8, "y": 2.25},
+                {"matrix": [6, 1], "x": 9, "y": 2.125},
+                {"matrix": [6, 2], "x": 10, "y": 2},
+                {"matrix": [6, 3], "x": 11, "y": 1.125},
+                {"matrix": [6, 4], "x": 12, "y": 2.25},
+                {"matrix": [6, 5], "x": 13, "y": 2.25},
+
+                // LEFT thumb cluster
+                {"matrix": [3, 4], "x": 5, "y": 3.0},
+                {"matrix": [3, 5], "x": 6, "y": 3.25},
+
+                // RIGHT thumb cluster
+                {"matrix": [7, 0], "x": 7, "y": 3.0},
+                {"matrix": [7, 1], "x": 8, "y": 3.25}
             ]
         }
     }

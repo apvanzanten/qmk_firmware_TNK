@@ -493,3 +493,22 @@ pytest:
 .PHONY: format-and-pytest
 format-and-pytest:
 	RUNTIME=docker ./util/docker_cmd.sh bash -lic "$(CONTAINER_PREAMBLE); qmk format-c --core-only -a && qmk format-python -a && qmk pytest"
+
+# custom targets for apvanzanten
+
+# target for writing to rp2040-based boards
+.PHONY: __sync-to-pico-a __sync-to-pico-b
+__sync-to-pico-a __sync-to-pico-b:
+	@echo "connect within the next 20 seconds please" && sleep 20 && echo "mounting" && mount ~/mnt/pico && echo "writing" && cp $(BUILD_DIR)/*.uf2 ~/mnt/pico/
+
+.PHONY: sync-to-pico
+sync-to-pico: __sync-to-pico-a __sync-to-pico-b
+
+.PHONY: do-qmk-compile
+do-qmk-compile:
+	@qmk compile -kb tnk -km full --compiledb
+
+# this command explicitly calls to make to enforce order without adding dependency to sync-to-pico
+.PHONY: qmk-compile-and-sync
+qmk-compile-and-sync:
+	@$(MAKE) do-qmk-compile && $(MAKE) sync-to-pico

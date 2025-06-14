@@ -3,7 +3,7 @@
   "keymap": "full",
   "layers": [
     [
-      "XXXXXXX", "KC_Q"        , "KC_W"        , "KC_E"        , "KC_R"        , "KC_T"         ,                                  "KC_Y"          , "KC_U"        , "KC_I"        , "KC_O"        , "KC_P"           , "TO(1)",
+      "XXXXXXX", "KC_Q"        , "KC_W"        , "KC_E"        , "KC_R"        , "KC_T"         ,                                  "KC_Y"          , "KC_U"        , "KC_I"        , "KC_O"        , "KC_P"           , "XXXXXXX",
       "KC_TAB" , "LGUI_T(KC_A)", "LALT_T(KC_S)", "LCTL_T(KC_D)", "LSFT_T(KC_F)", "KC_G"         ,                                  "KC_H"          , "RSFT_T(KC_J)", "RCTL_T(KC_K)", "RALT_T(KC_L)", "RGUI_T(KC_SCLN)", "KC_QUOT",
       "KC_INS" , "KC_Z"        , "KC_X"        , "KC_C"        , "KC_V"        , "KC_B"         ,                                  "KC_N"          , "KC_M"        , "KC_COMM"     , "KC_DOT"      , "KC_SLSH"        , "KC_BSLS",
                                                                                 "LT(2, KC_SPC)", "LT(3, KC_ESC)", "LT(3, KC_ENT)", "LT(2, KC_BSPC)"
@@ -15,7 +15,7 @@
                                                              "KC_SPC" , "LT(3,KC_ESC)", "LT(3,KC_ENT)", "LT(2, KC_BSPC)"
     ],
     [
-      "XXXXXXX", "KC_HOME", "KC_PGDN", "KC_PGUP", "KC_END" , "XXXXXXX",                       "XXXXXXX", "XXXXXXX"        , "XXXXXXX"      , "KC_MINUS"        , "KC_EQUAL", "XXXXXXX",
+      "XXXXXXX", "KC_HOME", "KC_PGDN", "KC_PGUP", "KC_END" , "XXXXXXX",                       "XXXXXXX", "XXXXXXX"        , "XXXXXXX"      , "KC_MINUS"        , "KC_EQUAL", "TO(1)",
       "XXXXXXX", "KC_LGUI", "KC_LALT", "KC_LCTL", "KC_LSFT", "XXXXXXX",                       "KC_LEFT", "RSFT_T(KC_DOWN)", "RCTL_T(KC_UP)", "RALT_T(KC_RIGHT)", "KC_RGUI" , "XXXXXXX",
       "XXXXXXX", "XXXXXXX", "XXXXXXX", "XXXXXXX", "XXXXXXX", "XXXXXXX",                       "XXXXXXX", "KC_LBRC"        , "KC_RBRC"      , "XXXXXXX"         , "XXXXXXX" , "XXXXXXX",
                                                              "XXXXXXX", "XXXXXXX", "XXXXXXX", "KC_DEL"

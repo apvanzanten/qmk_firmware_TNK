@@ -497,12 +497,13 @@ format-and-pytest:
 # custom targets for apvanzanten
 
 # target for writing to rp2040-based boards
-.PHONY: __sync-to-pico-a __sync-to-pico-b
-__sync-to-pico-a __sync-to-pico-b:
+# NOTE we have targets a, b, c to facilitate writing three times, to three keyboard halves.
+.PHONY: __sync-to-pico-a __sync-to-pico-b __sync-to-pico-c
+__sync-to-pico-a __sync-to-pico-b __sync-to-pico-c:
 	@echo "connect within the next 20 seconds please" && sleep 20 && echo "mounting" && mount ~/mnt/pico && echo "writing" && cp $(BUILD_DIR)/*.uf2 ~/mnt/pico/
 
 .PHONY: sync-to-pico
-sync-to-pico: __sync-to-pico-a __sync-to-pico-b
+sync-to-pico: __sync-to-pico-a __sync-to-pico-b __sync-to-pico-c
 
 .PHONY: do-qmk-compile
 do-qmk-compile:

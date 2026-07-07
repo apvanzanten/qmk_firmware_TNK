@@ -1,0 +1,5 @@
+SRC += encoder_hackery.c
+PROGRAMMABLE_BUTTON_ENABLE = yes
+F_CPU = 200000
+DEBOUNCE_TYPE = sym_defer_pk
+DEBOUNCE = 1

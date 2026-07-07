@@ -130,8 +130,19 @@
 
                 // RIGHT thumb cluster
                 {"matrix": [7, 3], "x": 7, "y": 3.0},
-                {"matrix": [7, 4], "x": 8, "y": 3.25}
+                {"matrix": [7, 4], "x": 8, "y": 3.25},
+
+                // RIGHT encoder
+                {"matrix": [7, 2], "x": 9, "y": 3.0}, // A
+                {"matrix": [7, 1], "x": 10, "y": 3.0}, // B
+                {"matrix": [7, 0], "x": 11, "y": 3.0}  // button
             ]
         }
-    }
+    },
+
+    "keycodes": [
+        {"key": "KC_ENC_A",     "aliases": ["ENCA"] },
+        {"key": "KC_ENC_B",     "aliases": ["ENCB"] },
+        {"key": "KC_ENC_SW",    "aliases": ["ENCSW"] }
+    ]
 }

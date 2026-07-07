@@ -500,7 +500,7 @@ format-and-pytest:
 # NOTE we have targets a, b to facilitate writing two times, to two keyboard halves.
 .PHONY: __sync-to-pico-a __sync-to-pico-b
 __sync-to-pico-a __sync-to-pico-b:
-	@echo "connect within the next 20 seconds please" && sleep 20 && echo "mounting" && mount ~/mnt/pico && echo "writing" && cp $(BUILD_DIR)/*.uf2 ~/mnt/pico/
+	@echo "connect within the next 10 seconds please" && sleep 10 && echo "mounting" && mount ~/mnt/pico && echo "writing" && cp $(BUILD_DIR)/*.uf2 ~/mnt/pico/
 
 .PHONY: sync-to-pico
 sync-to-pico: __sync-to-pico-a __sync-to-pico-b

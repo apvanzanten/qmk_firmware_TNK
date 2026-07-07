@@ -1,0 +1,137 @@
+{
+    /*
+        pins
+                    common  left    right
+        * SW_COL_1  COM_11  GP13    GP9
+        * SW_COL_2  COM_10  GP12    GP10
+        * SW_COL_3  COM_9   GP11    GP11
+        * SW_COL_4  COM_8   GP10    GP12
+        * SW_COL_5  COM_7   GP9     GP13
+        * SW_COL_6  COM_6   GP8     GP14
+        * SW_ROW_1  COM_17  GP29    GP3
+        * SW_ROW_2  COM_14  GP26    GP6
+        * SW_ROW_3  COM_13  GP15    GP7
+        * SW_ROW_4  COM_12  GP14    GP8
+
+        where ROWs are top-to-bottom, and cols are left-to-right for left half and right-to-left for right half;
+        symmetry is for PCB design hack reasons; reverse order in QMK cols definition for right half so it sees them left-to-right
+
+        NOTE thumb cluster switches are on col 2 and 3, encoder is on col 4, 5, 6
+    */
+
+    "manufacturer": "APvZ",
+    "keyboard_name": "thk",
+    "maintainer": "Arjen van Zanten",
+    // NOTE not actually a kb2040, but an rp2040-zero; probably close enough
+    "development_board": "kb2040",
+    "diode_direction": "COL2ROW",
+    "features": {
+        "bootmagic": false,
+        "extrakey": true,
+        "mousekey": false,
+        "nkro": true,
+        "rgblight": true
+    },
+
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0xDEAD",
+        "vid": "0xBEEF"
+    },
+    "serial": {
+        "driver": "vendor",
+        "tx_pin": "GP4",
+        "rx_pin": "GP5"
+    },
+
+    "matrix_pins": {
+        "cols": [ "GP13", "GP12", "GP11", "GP10", "GP9", "GP8" ],
+        "rows": [ "GP29", "GP26", "GP15", "GP14" ]
+    },
+
+    // common: WS2812 DIN: GP16
+    // set up as poor man's power LED
+    "ws2812": {
+        "pin": "GP16",
+        "driver": "vendor"
+    },
+    "rgblight": {
+        "led_count": 1,
+        "max_brightness": 8
+    },
+
+    "split": {
+        "enabled": true,
+        "matrix_pins": {
+            "right": {
+                "cols": [ "GP14", "GP13", "GP12", "GP11", "GP10", "GP9" ],
+                "rows": [ "GP3", "GP6", "GP7", "GP8" ]
+            }
+        },
+
+        "serial": {
+            "driver": "vendor"
+        }
+    },
+    "layouts": {
+        "LAYOUT_full": {
+            "layout": [
+                // LEFT top row
+                {"matrix": [0, 0], "x": 0, "y": 0.25},
+                {"matrix": [0, 1], "x": 1, "y": 0.25},
+                {"matrix": [0, 2], "x": 2, "y": 0.125},
+                {"matrix": [0, 3], "x": 3, "y": 0},
+                {"matrix": [0, 4], "x": 4, "y": 0.125},
+                {"matrix": [0, 5], "x": 5, "y": 0.25},
+
+                // RIGHT top row
+                {"matrix": [4, 0], "x": 8, "y": 0.25},
+                {"matrix": [4, 1], "x": 9, "y": 0.125},
+                {"matrix": [4, 2], "x": 10, "y": 0},
+                {"matrix": [4, 3], "x": 11, "y": 1.125},
+                {"matrix": [4, 4], "x": 12, "y": 0.25},
+                {"matrix": [4, 5], "x": 13, "y": 0.25},
+
+                // LEFT mid row
+                {"matrix": [1, 0], "x": 0, "y": 1.25},
+                {"matrix": [1, 1], "x": 1, "y": 1.25},
+                {"matrix": [1, 2], "x": 2, "y": 1.125},
+                {"matrix": [1, 3], "x": 3, "y": 1},
+                {"matrix": [1, 4], "x": 4, "y": 1.125},
+                {"matrix": [1, 5], "x": 5, "y": 1.25},
+
+                // RIGHT mid row
+                {"matrix": [5, 0], "x": 8, "y": 1.25},
+                {"matrix": [5, 1], "x": 9, "y": 1.125},
+                {"matrix": [5, 2], "x": 10, "y": 1},
+                {"matrix": [5, 3], "x": 11, "y": 1.125},
+                {"matrix": [5, 4], "x": 12, "y": 1.25},
+                {"matrix": [5, 5], "x": 13, "y": 1.25},
+
+                // LEFT bottom row
+                {"matrix": [2, 0], "x": 0, "y": 2.25},
+                {"matrix": [2, 1], "x": 1, "y": 2.25},
+                {"matrix": [2, 2], "x": 2, "y": 2.125},
+                {"matrix": [2, 3], "x": 3, "y": 2},
+                {"matrix": [2, 4], "x": 4, "y": 2.125},
+                {"matrix": [2, 5], "x": 5, "y": 2.25},
+
+                // RIGHT bottom row
+                {"matrix": [6, 0], "x": 8, "y": 2.25},
+                {"matrix": [6, 1], "x": 9, "y": 2.125},
+                {"matrix": [6, 2], "x": 10, "y": 2},
+                {"matrix": [6, 3], "x": 11, "y": 1.125},
+                {"matrix": [6, 4], "x": 12, "y": 2.25},
+                {"matrix": [6, 5], "x": 13, "y": 2.25},
+
+                // LEFT thumb cluster
+                {"matrix": [3, 1], "x": 5, "y": 3.0},
+                {"matrix": [3, 2], "x": 6, "y": 3.25},
+
+                // RIGHT thumb cluster
+                {"matrix": [7, 3], "x": 7, "y": 3.0},
+                {"matrix": [7, 4], "x": 8, "y": 3.25}
+            ]
+        }
+    }
+}

@@ -115,7 +115,7 @@ endef
 TRY_TO_MATCH_RULE_FROM_LIST = $(eval $(call TRY_TO_MATCH_RULE_FROM_LIST_HELPER,$1))$(RULE_FOUND)
 
 # As TRY_TO_MATCH_RULE_FROM_LIST_HELPER, but with additional
-# resolution of DEFAULT_FOLDER and keyboard_aliases.hjson for provided rule 
+# resolution of DEFAULT_FOLDER and keyboard_aliases.hjson for provided rule
 define TRY_TO_MATCH_RULE_FROM_LIST_HELPER_KB
     # Split on ":", padding with empty strings to avoid indexing issues
     TOKEN1:=$$(shell python3 -c "import sys; print((sys.argv[1].split(':',1)+[''])[0])" $$(RULE))
@@ -497,19 +497,28 @@ format-and-pytest:
 # custom targets for apvanzanten
 
 # target for writing to rp2040-based boards
-# NOTE we have targets a, b, c to facilitate writing three times, to three keyboard halves.
-.PHONY: __sync-to-pico-a __sync-to-pico-b __sync-to-pico-c
-__sync-to-pico-a __sync-to-pico-b __sync-to-pico-c:
+# NOTE we have targets a, b to facilitate writing two times, to two keyboard halves.
+.PHONY: __sync-to-pico-a __sync-to-pico-b
+__sync-to-pico-a __sync-to-pico-b:
 	@echo "connect within the next 20 seconds please" && sleep 20 && echo "mounting" && mount ~/mnt/pico && echo "writing" && cp $(BUILD_DIR)/*.uf2 ~/mnt/pico/
 
 .PHONY: sync-to-pico
-sync-to-pico: __sync-to-pico-a __sync-to-pico-b __sync-to-pico-c
+sync-to-pico: __sync-to-pico-a __sync-to-pico-b
 
-.PHONY: do-qmk-compile
-do-qmk-compile:
+.PHONY: do-qmk-compile-tnk
+do-qmk-compile-tnk:
 	@qmk compile -kb tnk -km full --compiledb
 
 # this command explicitly calls to make to enforce order without adding dependency to sync-to-pico
-.PHONY: qmk-compile-and-sync
-qmk-compile-and-sync:
-	@$(MAKE) do-qmk-compile && $(MAKE) sync-to-pico
+.PHONY: qmk-compile-and-sync-tnk
+qmk-compile-and-sync-tnk:
+	@$(MAKE) do-qmk-compile-tnk && $(MAKE) sync-to-pico
+
+.PHONY: do-qmk-compile-thk
+do-qmk-compile-thk:
+	@qmk compile -kb thk -km full --compiledb
+
+# this command explicitly calls to make to enforce order without adding dependency to sync-to-pico
+.PHONY: qmk-compile-and-sync-thk
+qmk-compile-and-sync-thk:
+	@$(MAKE) do-qmk-compile-thk && $(MAKE) sync-to-pico
